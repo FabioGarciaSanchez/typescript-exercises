@@ -99,14 +99,16 @@ const oldApi = {
 };
 
 function promisify<T>(arg: (callback: (response: ApiResponse<T>) => void) => void): any {
-  const tempCallback = (response: ApiResponse<T>) => {
-    if (response.status === 'success') {
-      return response.data;
-    } else {
-      return response.error;
+  return new Promise((resolve, reject) => {
+    const tempCallback = (response: ApiResponse<T>) => {
+      if (response.status === 'success') {
+        resolve(response.data);
+      } else {
+        reject(response.error);
+      }
     }
-  }
-  arg(tempCallback);
+    arg(tempCallback);
+  });
 }
 
 const api = {
@@ -124,12 +126,10 @@ function logPerson(person: Person) {
 
 async function startTheApp() {
   console.log('Pasó 0');
-  console.log(api.requestAdmins(), 'Siiii siiii 1');
-  console.log(api.requestAdmins, 'Siiii siiii 2');
   console.log(chalk.yellow('Admins:'));
 
-
   (await api.requestAdmins()).forEach(logPerson);
+
   console.log();
 
   console.log('Pasó 1');
