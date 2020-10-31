@@ -36,13 +36,13 @@ const users: User[] = [
   {
     name: 'Max Mustermann',
     age: 25,
-    occupation: 'Chimney sweep'
+    occupation: 'Chimney sweep',
   },
   {
     name: 'Kate Müller',
     age: 23,
-    occupation: 'Astronaut'
-  }
+    occupation: 'Astronaut',
+  },
 ];
 
 function logPerson(user: User) {
