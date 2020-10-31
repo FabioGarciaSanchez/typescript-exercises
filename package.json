@@ -30,6 +30,16 @@
     "12": "ts-node exercises/exercise-12/index.ts",
     "13": "ts-node exercises/exercise-13/index.ts",
     "14": "ts-node exercises/exercise-14/index.ts",
-    "15": "ts-node exercises/exercise-15/index.ts"
+    "15": "ts-node exercises/exercise-15/index.ts",
+    "postinstall": "husky install",
+    "lint": "eslint --ext .ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^5.0.0-beta.0"
   }
 }
