@@ -50,17 +50,25 @@ type PowerUser = IPowerUser;
 type Person = User | Admin | PowerUser;
 
 const persons: Person[] = [
-  {type: 'user', name: 'Max Mustermann', age: 25, occupation: 'Chimney sweep'},
-  {type: 'admin', name: 'Jane Doe', age: 32, role: 'Administrator'},
-  {type: 'user', name: 'Kate Müller', age: 23, occupation: 'Astronaut'},
-  {type: 'admin', name: 'Bruce Willis', age: 64, role: 'World saver'},
+  {
+    type: 'user', name: 'Max Mustermann', age: 25, occupation: 'Chimney sweep',
+  },
+  {
+    type: 'admin', name: 'Jane Doe', age: 32, role: 'Administrator',
+  },
+  {
+    type: 'user', name: 'Kate Müller', age: 23, occupation: 'Astronaut',
+  },
+  {
+    type: 'admin', name: 'Bruce Willis', age: 64, role: 'World saver',
+  },
   {
     type: 'powerUser',
     name: 'Nikki Stone',
     age: 45,
     role: 'Moderator',
-    occupation: 'Cat groomer'
-  }
+    occupation: 'Cat groomer',
+  },
 ];
 
 function isAdmin(person: Person): person is Admin {

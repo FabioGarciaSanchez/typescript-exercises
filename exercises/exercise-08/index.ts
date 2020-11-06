@@ -54,13 +54,21 @@ interface Admin {
 type Person = User | Admin;
 
 const admins: Admin[] = [
-  {type: 'admin', name: 'Jane Doe', age: 32, role: 'Administrator'},
-  {type: 'admin', name: 'Bruce Willis', age: 64, role: 'World saver'}
+  {
+    type: 'admin', name: 'Jane Doe', age: 32, role: 'Administrator',
+  },
+  {
+    type: 'admin', name: 'Bruce Willis', age: 64, role: 'World saver',
+  },
 ];
 
 const users: User[] = [
-  {type: 'user', name: 'Max Mustermann', age: 25, occupation: 'Chimney sweep'},
-  {type: 'user', name: 'Kate Müller', age: 23, occupation: 'Astronaut'}
+  {
+    type: 'user', name: 'Max Mustermann', age: 25, occupation: 'Chimney sweep',
+  },
+  {
+    type: 'user', name: 'Kate Müller', age: 23, occupation: 'Astronaut',
+  },
 ];
 
 interface ISuccess<T> {
@@ -75,48 +83,48 @@ interface IError {
 
 type IResponse<T> = ISuccess<T> | IError
 
-
-function requestAdmins(callback: (response: IResponse<Admin[]>) => void) {
+function requestAdmins(callback: (_response: IResponse<Admin[]>) => void) {
   callback({
     status: 'success',
-    data: admins
+    data: admins,
   });
 }
 
-function requestUsers(callback: (response: IResponse<User[]>) => void) {
+function requestUsers(callback: (_response: IResponse<User[]>) => void) {
   callback({
     status: 'success',
-    data: users
+    data: users,
   });
 }
 
-function requestCurrentServerTime(callback: (response: IResponse<number>) => void) {
+function requestCurrentServerTime(callback: (_response: IResponse<number>) => void) {
   callback({
     status: 'success',
-    data: Date.now()
+    data: Date.now(),
   });
 }
 
-function requestCoffeeMachineQueueLength(callback: (response: IResponse<null>) => void) {
+function requestCoffeeMachineQueueLength(callback: (_response: IResponse<null>) => void) {
   callback({
     status: 'error',
-    error: 'Numeric value has exceeded Number.MAX_SAFE_INTEGER.'
+    error: 'Numeric value has exceeded Number.MAX_SAFE_INTEGER.',
   });
 }
 
 function logPerson(person: Person) {
   console.log(
-    ` - ${chalk.green(person.name)}, ${person.age}, ${person.type === 'admin' ? person.role : person.occupation}`
+    ` - ${chalk.green(person.name)}, ${person.age}, ${person.type === 'admin' ? person.role : person.occupation}`,
   );
 }
 
-function startTheApp(callback: (error: Error | null) => void) {
+function startTheApp(callback: (_error: Error | null) => void) {
   requestAdmins((adminsResponse) => {
     console.log(chalk.yellow('Admins:'));
     if (adminsResponse.status === 'success') {
       adminsResponse.data.forEach(logPerson);
     } else {
-      return callback(new Error(adminsResponse.error));
+      callback(new Error(adminsResponse.error));
+      return;
     }
 
     console.log();
@@ -126,7 +134,8 @@ function startTheApp(callback: (error: Error | null) => void) {
       if (usersResponse.status === 'success') {
         usersResponse.data.forEach(logPerson);
       } else {
-        return callback(new Error(usersResponse.error));
+        callback(new Error(usersResponse.error));
+        return;
       }
 
       console.log();
@@ -136,7 +145,8 @@ function startTheApp(callback: (error: Error | null) => void) {
         if (serverTimeResponse.status === 'success') {
           console.log(`   ${new Date(serverTimeResponse.data).toLocaleString()}`);
         } else {
-          return callback(new Error(serverTimeResponse.error));
+          callback(new Error(serverTimeResponse.error));
+          return;
         }
 
         console.log();
@@ -146,7 +156,8 @@ function startTheApp(callback: (error: Error | null) => void) {
           if (coffeeMachineQueueLengthResponse.status === 'success') {
             console.log(`   ${coffeeMachineQueueLengthResponse.data}`);
           } else {
-            return callback(new Error(coffeeMachineQueueLengthResponse.error));
+            callback(new Error(coffeeMachineQueueLengthResponse.error));
+            return;
           }
 
           callback(null);
@@ -159,7 +170,7 @@ function startTheApp(callback: (error: Error | null) => void) {
 startTheApp((e: Error | null) => {
   console.log();
   if (e) {
-    console.log(`Error: "${e.message}", but it's fine, sometimes errors are inevitable.`)
+    console.log(`Error: "${e.message}", but it's fine, sometimes errors are inevitable.`);
   } else {
     console.log('Success!');
   }

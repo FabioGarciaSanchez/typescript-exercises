@@ -1,13 +1,14 @@
 export class Database<T> {
     protected filename: string;
+
     protected fullTextSearchFieldNames: unknown[];
 
     constructor(filename: string, fullTextSearchFieldNames) {
-        this.filename = filename;
-        this.fullTextSearchFieldNames = fullTextSearchFieldNames;
+      this.filename = filename;
+      this.fullTextSearchFieldNames = fullTextSearchFieldNames;
     }
 
     async find(query, options?): Promise<T[]> {
-        return [];
+      return [];
     }
 }

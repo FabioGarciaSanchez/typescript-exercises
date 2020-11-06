@@ -63,8 +63,8 @@ const persons: Person[] = [
   },
 ];
 
-function isAdmin(arg: any): arg is Admin {
-  return arg.role !== undefined;
+function isAdmin(arg: Person): arg is Admin {
+  return (arg as Admin).role !== undefined;
 }
 
 function logPerson(person: Person) {

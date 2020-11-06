@@ -50,6 +50,36 @@ interface Admin {
 
 type Person = Admin | User;
 
+const admins: Admin[] = [
+  {
+    type: 'admin',
+    name: 'Will Bruces',
+    age: 30,
+    role: 'Overseer',
+  },
+  {
+    type: 'admin',
+    name: 'Steve',
+    age: 40,
+    role: 'Steve',
+  },
+];
+
+const users: User[] = [
+  {
+    type: 'user',
+    name: 'Moses',
+    age: 70,
+    occupation: 'Desert guide',
+  },
+  {
+    type: 'user',
+    name: 'Superman',
+    age: 28,
+    occupation: 'Ordinary person',
+  },
+];
+
 function logUser(user: User) {
   const pos = users.indexOf(user) + 1;
   console.log(` - #${pos} User: ${chalk.green(user.name)}, ${user.age}, ${user.occupation}`);
@@ -67,36 +97,6 @@ function logPerson(person: Person) {
     logUser(person);
   }
 }
-
-const admins: Admin[] = [
-  {
-    type: 'admin',
-    name: 'Will Bruces',
-    age: 30,
-    role: 'Overseer'
-  },
-  {
-    type: 'admin',
-    name: 'Steve',
-    age: 40,
-    role: 'Steve'
-  }
-];
-
-const users: User[] = [
-  {
-    type: 'user',
-    name: 'Moses',
-    age: 70,
-    occupation: 'Desert guide'
-  },
-  {
-    type: 'user',
-    name: 'Superman',
-    age: 28,
-    occupation: 'Ordinary person'
-  }
-];
 
 function swap(v1: Person | any, v2: Person | any) {
   return [v2, v1];
